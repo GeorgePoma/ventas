@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Venta</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9f1e3;
+    margin: 0;
+    padding: 20px;
+    display: flex; /* Usar flexbox */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente (puedes ajustar según sea necesario) */
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+    min-height: 100vh; /* Asegura que ocupe al menos la altura de la ventana */
+}
+
+.form-section {
+    max-width: 800px;
+    background-color: #fff;
+    border: 1px solid #b1c0af;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Asegura que ocupe el ancho completo disponible dentro de la sección */
+    align-items: center; /* Esto no afecta porque estamos usando flex en el body */
+}
+
+h1 {
+    font-size: 2em;
+    color: #4d771e;
+    text-align: center; /* Centra el texto del encabezado */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(254, 254, 254, 0.292);
+
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #4d771e;
+    border-bottom: 2px solid #2a9110;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center; /* Centra el texto del subtítulo */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th {
+    background-color: #b1c0af;
+    text-align: center; /* Centra el texto de los encabezados de tabla */
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+td {
+    padding: 10px;
+    vertical-align: top;
+    border: 1px solid #ccc;
+    position: relative; /* Para usar el pseudo-elemento después */
+}
+
+    /* Ancho específico para las primeras dos columnas */
+    .items-table th:nth-child(1),
+    .items-table td:nth-child(1) {
+        width: 5%;
+    }
+
+    .items-table th:nth-child(2),
+    .items-table td:nth-child(2) {
+        width: 25%;
+    }
+
+    .items-table th:nth-child(5-6),
+    .items-table td:nth-child(5-6) {
+        width: 8%;
+    }
+
+    /* .items-table th:nth-child(6),
+    .items-table td:nth-child(6) {
+        width: 8%;
+    } */
+    /* Las demás columnas son responsivas
+    .items-table th:nth-child(n+3),
+    .items-table td:nth-child(n+3) {
+        width: auto;
+    } */
+
+label {
+    font-weight: lighter;
+    color: black;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+select {
+    width: 98%;
+    padding: 4px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #08350b;
+    display: block; /* Asegura que cada campo esté en su propia línea */
+    margin-bottom: 10px; /* Espaciado inferior uniforme */
+    margin-left: auto; /* Centra el campo */
+    margin-right: auto; /* Centra el campo */
+}
+
+input:focus,
+select:focus {
+    border-color: #4d771e;
+    outline: none;
+}
+
+/* Estilo general para los botones */
+button {
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px; /* Espacio superior */
+    margin: 0 10px; /* Espacio horizontal entre botones */
+}
+
+/* Estilo específico para el botón "Añadir Producto" */
+.add-product {
+    background-color: #0e7001; /* Verde */
+}
+
+.add-product:hover {
+    background-color: #0f5b7e; /* Efecto hover */
+}
+
+/* Estilo específico para el botón "Limpiar" */
+.clear-form {
+    background-color: #FFA500; /* Naranja */
+}
+
+.clear-form:hover {
+    background-color: #a95d00; /* Efecto hover */
+}
+
+/* Estilo específico para el botón "Imprimir" */
+.print-form {
+    background-color: #00CED1; /* Celeste */
+}
+
+.print-form:hover {
+    background-color: #147974; /* Efecto hover */
+}
+
+/* Estilo para el contenedor de los botones */
+.button-container {
+    display: flex; /* Usa flexbox para alinear los botones en fila */
+    justify-content: center; /* Centra los botones horizontalmente */
+    margin-top: 20px; /* Margen superior para el contenedor */
+}
+
+
+
+</style>
+</head>
+<body>
+
+<h1>Formulario de Venta</h1>
+
+<div class="form-section header">
+    <h3>Datos del cliente</h3>
+    <table class="two-column-layout">
+        <tr>
+            <td>
+                <label for="nroVenta">Nro de Venta:</label>
+                <input type="text" id="nroVenta" placeholder="0001">
+            </td>
+            <td>
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" placeholder="George Poma">
+            </td>
+            <td>
+                <label for="telefono">Teléfono/Celular:</label>
+                <input type="tel" id="telefono" placeholder="77770000">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" placeholder="C. Esmeralda Z. Las Delicias # 2020">
+            </td>
+            <td>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="neverloose@gmail.com">
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-section items">
+    <h3>Detalles de la Venta</h3>
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Item</th>
+                <th>Descripción</th>
+                <th>Imagen</th>   
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="items-body">
+            <!-- Las filas se generan dinámicamente -->
+        </tbody>
+    </table>
+
+    <!-- Contenedor de botones debajo de la tabla -->
+    <div class="button-container">
+        <button class="add-product" onclick="addProductRow()">Añadir Producto</button>
+        <button class="clear-form" onclick="clearForm()">Limpiar</button>
+        <button class="print-form" onclick="printForm()">Imprimir</button>
+    </div>
+
+
+
+</div>
+
+<div class="form-section summary">
+    <h3>Resumen</h3>
+    <table class="summary-table">
+        <tr>
+            <th>Subtotal</th>
+            <td><input type="text" id="totalSubtotal" readonly></td>
+        </tr>
+        <tr>
+            <th>IVA (13%)</th>
+            <td><input type="text" id="iva" readonly></td>
+        </tr>
+        <tr>
+            <th>Importe Total</th>
+            <td><input type="text" id="total" readonly></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+
+    let rowCount = 0;
+
+    // Función para añadir una nueva fila de producto
+    function addProductRow() {
+        rowCount++;
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="number" min="1" value="1" onchange="calculateSubtotal(${rowCount})" id="cantidad${rowCount}"></td>
+            <td>
+                <select onchange="showProduct(${rowCount})" id="descripcion${rowCount}">
+                    <option value="">Seleccione un producto</option>
+                    <option value="Producto A" data-precio="4800">Samsung S24</option>
+                    <option value="Producto B" data-precio="4400">Xiaomi 13 Pro</option>
+                    <option value="Producto C" data-precio="3050">Huawei Watch GT 5 Pro</option>
+                    <option value="Producto D" data-precio="5390">Dell Inspiron 15 3520</option>
+                    <option value="Producto E" data-precio="1700">Lenovo Tab M10</option>
+                </select>
+            </td>
+            <td><span id="descripcionProducto${rowCount}" style="font-size: 12px"></span></td> <!-- Cambiado a span para descripción -->
+            <td><img id="product-image${rowCount}" alt="Imagen del producto" style="width: 50px; height: 50px; display: none;"></td>
+            <td><input type="number" min="0" value="0" onchange="calculateSubtotal(${rowCount})" id="precioUnitario${rowCount}" readonly></td>
+            <td><input type="text" readonly id="subtotal${rowCount}" value="0"></td>
+        `;
+        document.getElementById('items-body').appendChild(row);
+    }
+
+    // Función para mostrar imagen y descripción del producto
+    function showProduct(row) {
+        const select = document.getElementById(`descripcion${row}`);
+        const image = document.getElementById(`product-image${row}`);
+        const precioInput = document.getElementById(`precioUnitario${row}`);
+        const descripcionSpan = document.getElementById(`descripcionProducto${row}`); // Obtener el span de descripción
+
+        let imageSrc = ""; // Variable para almacenar la fuente de la imagen
+
+        if (select.value === "Producto A") {
+            imageSrc = "samsungs24.jpg"; // Ruta de la imagen para Producto A
+            precioInput.value = select.options[select.selectedIndex].dataset.precio; // Precio de Producto A
+            descripcionSpan.textContent = "Ultra y Cargador 45W, Teléfono Móvil con IA, Smartphone Android, 12 GB RAM, 256 GB Almacenamiento, Cámara 200MP, S Pen, Batería Larga Duración, Negro Titanium"; // Descripción de Producto A
+        } else if (select.value === "Producto B") {
+            imageSrc = "xiaomi13pro.jpg"; // Ruta de la imagen para Producto B
+            precioInput.value = select.options[select.selectedIndex].dataset.precio; // Precio de Producto B
+            descripcionSpan.textContent = "Procesador Snapdragon 8 Gen 2 RAM: 12 GB Almacenamiento: 256 GB Dimensiones y peso: 162,8 x 74,6 x 8,38 mm 229 g. Batería: 4820 mAh Sistema operativo: MIUI 14 Conectividad: 5G"; // Descripción de Producto B
+        } else if (select.value === "Producto C") {
+            imageSrc = "huaweismart.jpg"; // Ruta de la imagen para Producto C
+            precioInput.value = select.options[select.selectedIndex].dataset.precio; // Precio de Producto C
+            descripcionSpan.textContent = "Smartwatch, Silueta con Diseño Sofisticado, Deportes de Alto Nivel, Seguimiento de Salud, Monitoreo ECG, 14 Días de Duración, GPS, iOS y Android, Negro"; // Descripción de Producto C
+        } else if (select.value === "Producto D") {
+            imageSrc = "dell.jpg"; // Ruta de la imagen para Producto D
+            precioInput.value = select.options[select.selectedIndex].dataset.precio; // Precio de Producto D
+            descripcionSpan.textContent = "Ordenador Portátil de 15.6 FHD (1920 x 1080), Intel Core i7-1255U, Intel Iris Xe gráfica, 16GB RAM, 1TB SSD, Windows 11 Home, Teclado QWERTY Español, Negro"; // Descripción de Producto D
+        } else if (select.value === "Producto E") {
+            imageSrc = "lenovo.jpg"; // Ruta de la imagen para Producto E
+            precioInput.value = select.options[select.selectedIndex].dataset.precio; // Precio de Producto E
+            descripcionSpan.textContent = "Tablet de 10.1 WUXGA (Unisoc T610, 4 GB de RAM, 64 GB ampliables hasta 2 TB, 2 Altavoces, WiFi + Bluetooth 5.0, Android 11) - Gris"; // Descripción de Producto E
+        } else {
+            imageSrc = ""; // Limpiar la imagen si no hay producto seleccionado
+            precioInput.value = 0; // Limpiar el precio si no hay producto seleccionado
+            descripcionSpan.textContent = ""; // Limpiar la descripción si no hay producto seleccionado
+        }
+
+        if (imageSrc) {
+            image.src = imageSrc; // Asignar la fuente de la imagen
+            image.style.display = "block"; // Mostrar la imagen
+        } else {
+            image.src = ""; // Limpiar la imagen si no se seleccionó
+            image.style.display = "none"; // Ocultar la imagen
+        }
+
+        // Calcular el subtotal si se ha seleccionado un producto
+        if (select.value) {
+            calculateSubtotal(row);
+        }
+    }
+
+    // Función para calcular el subtotal por fila y actualizar el total
+    function calculateSubtotal(row) {
+        const cantidad = document.getElementById(`cantidad${row}`).value || 0;
+        const precioUnitario = document.getElementById(`precioUnitario${row}`).value || 0;
+        const subtotal = cantidad * precioUnitario;
+        document.getElementById(`subtotal${row}`).value = subtotal.toFixed(2);
+
+        updateTotals();
+    }
+
+    // Función para calcular el total, IVA e importe final
+    function updateTotals() {
+        let totalSubtotal = 0;
+
+        for (let i = 1; i <= rowCount; i++) {
+            const subtotal = parseFloat(document.getElementById(`subtotal${i}`).value) || 0;
+            totalSubtotal += subtotal;
+        }
+
+        const iva = totalSubtotal * 0.13;
+        const total = totalSubtotal + iva;
+
+        document.getElementById('totalSubtotal').value = totalSubtotal.toFixed(2);
+        document.getElementById('iva').value = iva.toFixed(2);
+        document.getElementById('total').value = total.toFixed(2);
+    }
+
+    // Inicializar con 3 filas de productos
+    for (let i = 0; i < 3; i++) {
+        addProductRow();
+    }
+
+    // Función para limpiar el formulario
+    function clearForm() {
+        document.getElementById('nroVenta').value = '';
+        document.getElementById('fecha').value = '';
+        document.getElementById('cliente').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('direccion').value = '';
+        document.getElementById('email').value = '';
+        
+        const itemsBody = document.getElementById('items-body');
+        itemsBody.innerHTML = ''; // Limpiar todas las filas
+        
+        rowCount = 0; // Reiniciar el contador de filas
+        
+        // Agregar 3 filas de productos iniciales
+        for (let i = 0; i < 3; i++) {
+            addProductRow(); 
+        }
+        
+        rowCount = 3; // Ahora hay 3 filas
+
+        document.getElementById('totalSubtotal').value = '';
+        document.getElementById('iva').value = '';
+        document.getElementById('total').value = '';
+
+        updateTotals();
+    }
+
+    // Función para imprimir el formulario
+    function printForm() {
+        window.print(); // Imprimir la página
+    }
+
+</script>
+</body>
+</html>
